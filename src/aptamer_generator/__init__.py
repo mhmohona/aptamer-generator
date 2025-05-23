@@ -1,1 +1,2 @@
-from .aptamers import AptaDesign
+from .aptamers import AptamerGenerator
+from .utils import AptamerUtils

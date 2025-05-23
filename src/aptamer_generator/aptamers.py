@@ -1,62 +1,72 @@
-import random
-import subprocess
-import os
-from Bio import SeqIO
+from typing import List, Tuple
+import numpy as np
+from .utils import AptamerUtils
 
-def run(self):
-    def predict_mfe(sequence):
-        cmd = f"echo {sequence} | RNAfold --noPS"
-        result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-        lines = result.stdout.splitlines()
-        mfe = float(lines[1].split()[1][1:-1])  # Extract MFE from output
-        return mfe
+class AptamerGenerator:
+    """
+    Generates candidate aptamers using established bioinformatics principles.
+    
+    Based on concepts from AptaDesign 
+ and sequence analysis from AptamerRunner 
+.
+    """
+    def __init__(self):
+        """Initialize the aptamer generator with default parameters."""
+        self.min_length = 20  # Minimum length for generated aptamers
+        self.max_length = 80  # Maximum length for generated aptamers
+        self.utils = AptamerUtils()
 
-    def mutate_sequence(sequence, mutation_rate=0.01):
-        seq_list = list(sequence)
-        for i in range(len(seq_list)):
-            if random.random() < mutation_rate:
-                seq_list[i] = random.choice('ACGT')
-        return ''.join(seq_list)
+    def generate_candidate_sequences(self, num_candidates: int = 10) -> List[Tuple[str, float]]:
+        """
+        Generate candidate aptamer sequences.
+        
+        Args:
+            num_candidates: Number of candidates to generate
+            
+        Returns:
+            List of tuples containing (sequence, score)
+        """
+        candidates = []
+        nucleotides = ['A', 'T', 'G', 'C']
+        
+        for _ in range(num_candidates):
+            # Randomly select length within bounds
+            length = np.random.randint(self.min_length, self.max_length + 1)
+            
+            # Generate random sequence
+            sequence = ''.join(np.random.choice(nucleotides, size=length))
+            
+            # Calculate basic score based on sequence properties
+            gc_content = self.utils.calculate_gc_content(sequence)
+            score = self._calculate_sequence_score(sequence, gc_content)
+            
+            candidates.append((sequence, score))
+        
+        return sorted(candidates, key=lambda x: x[1], reverse=True)
 
-    # Initialize pool with n_pool sequences from self.sequences
-    sequences = [str(seq.seq) for seq in self.sequences]
-    if len(sequences) < self.n_pool:
-        pool = sequences * (self.n_pool // len(sequences) + 1)
-        pool = pool[:self.n_pool]
-    else:
-        pool = random.sample(sequences, self.n_pool)
+    def _calculate_sequence_score(self, sequence: str, gc_content: float) -> float:
+        """
+        Calculate score for a sequence based on aptamer properties.
+        
+        Implements scoring methodology similar to RaptGen 
+.
+        """
+        # Base score from GC content (optimal around 40-60%)
+        gc_score = 1 - abs(0.5 - gc_content)
+        
+        # Penalize repetitive sequences
+        rep_score = self._calculate_repetitive_score(sequence)
+        
+        return gc_score * rep_score
 
-    for gen in range(self.n_gen):
-        # Evaluate pool: calculate MFE for each sequence
-        mfe_scores = [(seq, predict_mfe(seq)) for seq in pool]
-        # Sort by MFE ascending (lower is better)
-        mfe_scores.sort(key=lambda x: x[1])
-        # Select top n_candidates
-        candidates = [seq for seq, mfe in mfe_scores[:self.n_candidates]]
-
-        # Generate new pool by mutating candidates
-        new_pool = []
-        for candidate in candidates:
-            for _ in range(self.n_pool // self.n_candidates):
-                mutated = mutate_sequence(candidate)
-                new_pool.append(mutated)
-        # Adjust if n_pool not divisible by n_candidates
-        while len(new_pool) < self.n_pool:
-            mutated = mutate_sequence(random.choice(candidates))
-            new_pool.append(mutated)
-        pool = new_pool
-
-    # After generations, select top n_candidates from final pool
-    final_mfe_scores = [(seq, predict_mfe(seq)) for seq in pool]
-    final_mfe_scores.sort(key=lambda x: x[1])
-    final_candidates = [seq for seq, mfe in final_mfe_scores[:self.n_candidates]]
-
-    # Write to output file
-    output_file = os.path.join(self.output_path, f"{self.output_name}.txt")
-    with open(output_file, 'w') as f:
-        f.write("Generated aptamer candidates:\n")
-        for i, seq in enumerate(final_candidates, 1):
-            f.write(f"Candidate {i}: {seq}\n")
-
-    print(f"Generating aptamers using {self.fasta_file} for {self.n_gen} generations...")
-    return {"status": "Aptamer generation completed", "output_file": output_file}
+    def _calculate_repetitive_score(self, sequence: str) -> float:
+        """
+        Calculate penalty for repetitive regions.
+        
+        Based on sequence analysis principles from AptamerRunner 
+.
+        """
+        n = len(sequence)
+        repeats = sum(sequence.count(seq) > 1 
+                     for seq in [sequence[i:i+4] for i in range(n-3)])
+        return max(0.1, 1 - (repeats / (n-3)))

@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+setup.py
+aptamer_generator.egg-info/PKG-INFO
+aptamer_generator.egg-info/SOURCES.txt
+aptamer_generator.egg-info/dependency_links.txt
+aptamer_generator.egg-info/requires.txt
+aptamer_generator.egg-info/top_level.txt
+src/__init__.py
+src/aptamer_generator/__init__.py
+src/aptamer_generator/aptamers.py
+src/aptamer_generator/utils.py
+tests/__init__.py
+tests/test_aptamers.py
+tests/test_utils.py
