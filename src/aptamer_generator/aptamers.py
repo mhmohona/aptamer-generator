@@ -4,11 +4,9 @@ from .utils import AptamerUtils
 
 class AptamerGenerator:
     """
-    Generates candidate aptamers using established bioinformatics principles.
+    Generates candidate aptamers.
     
-    Based on concepts from AptaDesign 
- and sequence analysis from AptamerRunner 
-.
+    Based on concepts from AptaDesign and sequence analysis from AptamerRunner 
     """
     def __init__(self):
         """Initialize the aptamer generator with default parameters."""
@@ -49,7 +47,6 @@ class AptamerGenerator:
         Calculate score for a sequence based on aptamer properties.
         
         Implements scoring methodology similar to RaptGen 
-.
         """
         # Base score from GC content (optimal around 40-60%)
         gc_score = 1 - abs(0.5 - gc_content)

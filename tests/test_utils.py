@@ -1,21 +1,19 @@
 import pytest
 import os
-from aptamer_generator.apta_design import AptaDesign
+from aptamer_generator.aptamers import AptamerGenerator
+from aptamer_generator.utils import AptamerUtils
 
 def test_aptadesign_init():
-    ad = AptaDesign(fasta_file='examples/thrombin_aptamers.fasta', n_gen=1, output_path='.', output_name='test')
-    assert ad.fasta_file == 'examples/thrombin_aptamers.fasta'
-    assert ad.n_gen == 1
-    assert ad.output_path == '.'
-    assert ad.output_name == 'test'
-    assert len(ad.sequences) > 0  # Ensure sequences are loaded
-
-def test_aptadesign_init_invalid_fasta():
-    with pytest.raises(FileNotFoundError):
-        AptaDesign(fasta_file='nonexistent.fasta', n_gen=1, output_path='.', output_name='test')
+    """Test aptamer generation initialization."""
+    generator = AptamerGenerator()
+    assert generator.min_length == 20
+    assert generator.max_length == 80
 
 def test_aptadesign_run():
-    ad = AptaDesign(fasta_file='examples/thrombin_aptamers.fasta', n_gen=1, output_path='.', output_name='test')
-    result = ad.run()
-    assert result["status"] == "Aptamer generation completed"
-    assert os.path.exists(result["output_file"])
+    """Test aptamer generation execution."""
+    generator = AptamerGenerator()
+    candidates = generator.generate_candidate_sequences(num_candidates=5)
+    assert len(candidates) == 5
+    for sequence, score in candidates:
+        assert isinstance(sequence, str)
+        assert isinstance(score, float)

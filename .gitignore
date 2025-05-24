@@ -1,0 +1,48 @@
+# Byte-compiled Python files
+*.py[cod]
+*.pyd
+*.pyo
+*.pyz
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Virtual environment files
+.venv/
+venv/
+env/
+ENV/
+
+# Build artifacts
+build/
+dist/
+*.egg
+*.egg-info/
+
+# Test files
+.tox/
+.pytest_cache/
+pytest.log
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+*.tmp
+
+# Wheels
+*.whl
+
+# Coverage files
+.coverage
+.htmlcov/
+*.cover
