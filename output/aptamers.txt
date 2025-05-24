@@ -1,0 +1,75 @@
+Candidate 1:
+Sequence: CAATTCACGCGCTTTACCTCT
+Length: 21
+Score: 0.976
+--------------------------------------------------
+Candidate 2:
+Sequence: TCTATGGTAAAAGCGTCGCT
+Length: 20
+Score: 0.950
+--------------------------------------------------
+Candidate 3:
+Sequence: GTCCTGTCGTTAAGCAACACTCTGTTTTACCATATGATTGACGACGATGGCTGCTC
+Length: 56
+Score: 0.928
+--------------------------------------------------
+Candidate 4:
+Sequence: GGGTGTCGAGGAATGCGTGGCTATGCTTGGTCACA
+Length: 35
+Score: 0.871
+--------------------------------------------------
+Candidate 5:
+Sequence: GCCTCCAACGGCAATCGAACTAACAGGAATCAAGACAAAGCAGTATTGAGTGTCATCAGGCCCAGTCCTC
+Length: 70
+Score: 0.851
+--------------------------------------------------
+Candidate 6:
+Sequence: ACCACACCGCCCAGTCCGAGGCTTGGCAT
+Length: 29
+Score: 0.845
+--------------------------------------------------
+Candidate 7:
+Sequence: CGCAGCTTTGCTTGAATTCGCCC
+Length: 23
+Score: 0.841
+--------------------------------------------------
+Candidate 8:
+Sequence: GTTTAATGGCTGCGTTGCGCTGACTA
+Length: 26
+Score: 0.826
+--------------------------------------------------
+Candidate 9:
+Sequence: ACACCATGGCTGGAATGCTTCATAAAACTGAGCCGCACAGTGTGGACCTGACCTGT
+Length: 56
+Score: 0.797
+--------------------------------------------------
+Candidate 10:
+Sequence: ATGACAGGCCGGCCTAACCCGGACTCCAAAA
+Length: 31
+Score: 0.788
+--------------------------------------------------
+Candidate 11:
+Sequence: AACGTGACGGTTCACCTGTTCATAGTTTACGACCT
+Length: 35
+Score: 0.778
+--------------------------------------------------
+Candidate 12:
+Sequence: CATTATGTCATATGTGTAAGGCCAGAACAGATGTTCGCGGCGGCGGGTTATGCAAATCTT
+Length: 60
+Score: 0.746
+--------------------------------------------------
+Candidate 13:
+Sequence: TGATAGCTGCTCGGTTCAATACTACTGCACTGGAAACTACGATGATTTGTAC
+Length: 52
+Score: 0.735
+--------------------------------------------------
+Candidate 14:
+Sequence: TTTGCTGTAGGACCTTTGCTG
+Length: 21
+Score: 0.542
+--------------------------------------------------
+Candidate 15:
+Sequence: ATCCGTATCCGTATCTATAGCCGTCTCGCCTCTACTTTGTGCTCCTATCCTACCCT
+Length: 56
+Score: 0.528
+--------------------------------------------------
