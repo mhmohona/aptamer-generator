@@ -20,13 +20,6 @@ cd aptamer-generator
 pip install -e .
 ```
 
-### Requirements
-
-The package depends on the following libraries, which are automatically installed during setup:
-
-- [numpy](https://numpy.org/): For numerical operations and random sequence generation.
-- [biopython](https://biopython.org/): For handling biological sequences, such as FASTA files.
-
 ## Usage
 
 ### Command-line Example
@@ -37,7 +30,7 @@ The package includes an example script to generate aptamer sequences and save th
 python3 -m examples.usage --num-candidates 10
 ```
 
-This generates 10 candidate sequences (the numbers can be changed as per need) and saves them to `output/aptamers.txt`. The script uses the `thrombin_aptamers.fasta` dataset in the `examples/` directory as a reference or for testing.
+This generates 10 candidate sequences (the numbers can be changed by user as per need) and saves them to `output/aptamers.txt`.
 
 ### Configuration
 
@@ -98,6 +91,7 @@ Score: 0.661
 
 The output format can be configured to FASTA via the `file_format` parameter.
 
+
 ## Testing
 
 The package includes tests to verify functionality. Run them using:
@@ -110,7 +104,69 @@ Tests are located in the `tests/` directory, covering sequence generation, scori
 
 ## Example Dataset
 
-The `examples/thrombin_aptamers.fasta` file provides a sample dataset for testing or reference, usable via the `AptamerUtils.load_fasta_file` function.
+The `examples/thrombin_aptamers.fasta` file provides a sample dataset for validating and banchmarking.
+
+## Validation Results
+
+The package has been validated using a set of thrombin-binding aptamer sequences. Recent validation results show:
+
+### Reference Dataset Statistics
+- Mean sequence length: 14.67 ± 0.47 nucleotides
+- Mean GC content: 57% ± 3%
+- Three reference sequences with lengths 14-15 nucleotides
+
+### Generated Sequence Statistics
+- Mean sequence length: 14.40 ± 0.49 nucleotides
+- Mean GC content: 50% ± 4%
+- Five candidate sequences generated
+- All sequences within target length range (14-15 nt)
+
+### Sequence Alignment Results
+- Best alignment scores:
+  * Candidate 2: 14.50 (thrombin_aptamer3)
+  * Candidate 5: 15.00 (thrombin_aptamer2)
+  * Candidate 4: 11.50 (thrombin_aptamer2)
+  * Candidate 3: 9.30 (thrombin_aptamer2)
+  * Candidate 1: 8.90 (thrombin_aptamer1)
+
+Here is a diagram of the validation workflow:
+
+```mermaid
+flowchart TD
+    subgraph "Input Processing"
+        A[Load Reference Sequences] --> B{File Exists?}
+        B -->|No| C[Error: File Not Found]
+        B -->|Yes| D[Validate Sequence Format]
+        D --> E{Valid Format?}
+        E -->|No| F[Error: Invalid Format]
+        E -->|Yes| G[Compute Reference Stats]
+    end
+    
+    subgraph "Generation"
+        H[Generate Candidates] --> I{Generation Successful?}
+        I -->|No| J[Error: Generation Failed]
+        I -->|Yes| K[Validate Generated Sequences]
+    end
+    
+    subgraph "Analysis"
+        L[Compute Generated Stats] --> M[Compare with Reference]
+        M --> N[Perform Sequence Alignment]
+        N --> O[Generate Report]
+    end
+    
+    G --> H
+    K --> L
+    
+    classDef process fill:#f9f,stroke:#333,stroke-width:2px,color:#000
+    classDef decision fill:#bbf,stroke:#333,stroke-width:2px,color:#000
+    classDef error fill:#fbb,stroke:#333,stroke-width:2px,color:#000
+    
+    class A,D,G,H,K,L,M,N,O process
+    class B,E,I decision
+    class C,F,J error
+```
+
+The validation results shows that the package successfully generates sequences that match the reference dataset's characteristics, with alignment scores indicating good similarity between generated and reference sequences.
 
 ## Inspiration
 

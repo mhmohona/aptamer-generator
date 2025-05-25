@@ -3,11 +3,13 @@ import os
 from aptamer_generator.aptamers import AptamerGenerator
 from aptamer_generator.utils import AptamerUtils
 
+
 def test_aptadesign_init():
     """Test aptamer generation initialization."""
     generator = AptamerGenerator()
     assert generator.min_length == 20
     assert generator.max_length == 80
+
 
 def test_aptadesign_run():
     """Test aptamer generation execution."""
