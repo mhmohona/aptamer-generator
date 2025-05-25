@@ -12,8 +12,6 @@ To install the package from GitHub, use:
 pip install git+https://github.com/mhmohona/aptamer-generator.git
 ```
 
-Replace `<username>` with your actual GitHub username.
-
 Alternatively, clone the repository and install locally:
 
 ```bash
@@ -40,19 +38,6 @@ python3 -m examples.usage --num-candidates 10
 ```
 
 This generates 10 candidate sequences (the numbers can be changed as per need) and saves them to `output/aptamers.txt`. The script uses the `thrombin_aptamers.fasta` dataset in the `examples/` directory as a reference or for testing.
-
-### Programmatic Usage
-
-You can integrate the `AptamerGenerator` class into your Python scripts for custom workflows:
-
-```python
-from aptamer_generator import AptamerGenerator
-
-generator = AptamerGenerator()
-candidates = generator.generate_candidate_sequences(num_candidates=5)
-for seq, score in candidates:
-    print(f"Sequence: {seq}, Score: {score}")
-```
 
 ### Configuration
 
@@ -133,9 +118,3 @@ This package is inspired by computational tools for aptamer design, including:
 
 - [AptaDesign](https://github.com/JuanCRueda/AptaDesign): A Python tool for in silico aptamer design using motif extraction and directed evolution.
 - [RaptGen](https://www.nature.com/articles/s43588-022-00249-6): An AI-powered tool using variational autoencoders for aptamer generation.
-
-Note: The term "aptdata" may refer to datasets like `thrombin_aptamers.fasta` or tools like AptaDesign. If you meant a specific dataset or tool, please clarify.
-
-## License
-
-See the `LICENSE` file in the repository for details.
