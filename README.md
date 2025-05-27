@@ -20,6 +20,9 @@ cd aptamer-generator
 pip install -e .
 ```
 
+<img width="855" alt="image" src="https://github.com/user-attachments/assets/6e0362c2-18dc-4567-974f-e8a6df922508" />
+
+
 ## Usage
 
 ### Command-line Example
@@ -31,6 +34,9 @@ python3 -m examples.usage --num-candidates 10
 ```
 
 This generates 10 candidate sequences (the numbers can be changed by user as per need) and saves them to `output/aptamers.txt`.
+
+<img width="806" alt="image" src="https://github.com/user-attachments/assets/2c5e727f-246e-499e-afe2-edee700dfb23" />
+
 
 ### Configuration
 
@@ -102,6 +108,9 @@ pytest
 
 Tests are located in the `tests/` directory, covering sequence generation, scoring, and utility functions.
 
+<img width="856" alt="image" src="https://github.com/user-attachments/assets/295caa7b-10f8-4901-bf37-790ddf8b132e" />
+
+
 ## Example Dataset
 
 The `examples/thrombin_aptamers.fasta` file provides a sample dataset for validating and banchmarking.
@@ -110,24 +119,8 @@ The `examples/thrombin_aptamers.fasta` file provides a sample dataset for valida
 
 The package has been validated using a set of thrombin-binding aptamer sequences. Recent validation results show:
 
-### Reference Dataset Statistics
-- Mean sequence length: 14.67 ± 0.47 nucleotides
-- Mean GC content: 57% ± 3%
-- Three reference sequences with lengths 14-15 nucleotides
+<img width="845" alt="image" src="https://github.com/user-attachments/assets/d44b4d54-7cb3-49c8-87e0-59a9df6feb76" />
 
-### Generated Sequence Statistics
-- Mean sequence length: 14.40 ± 0.49 nucleotides
-- Mean GC content: 50% ± 4%
-- Five candidate sequences generated
-- All sequences within target length range (14-15 nt)
-
-### Sequence Alignment Results
-- Best alignment scores:
-  * Candidate 2: 14.50 (thrombin_aptamer3)
-  * Candidate 5: 15.00 (thrombin_aptamer2)
-  * Candidate 4: 11.50 (thrombin_aptamer2)
-  * Candidate 3: 9.30 (thrombin_aptamer2)
-  * Candidate 1: 8.90 (thrombin_aptamer1)
 
 Here is a diagram of the validation workflow:
 
